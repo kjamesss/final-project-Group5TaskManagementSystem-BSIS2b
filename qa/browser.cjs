@@ -146,7 +146,7 @@ async function run() {
     await button('Edit Alex Rivera').click();
     await page.locator('#change-name').fill('Alex Rivera Cruz');
     await button('Save changes').click();
-    await page.getByText('Alex Rivera Cruz',{exact:true}).waitFor();
+    await page.locator('#profile-details').getByText('Alex Rivera Cruz',{exact:true}).waitFor();
     for (const file of ['index','login','register','dashboard','tasks','add-task','profile','admin']) {
         await go('/'+file+'.html');
         assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), file+' mobile overflow');
