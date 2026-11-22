@@ -74,9 +74,8 @@ document.querySelectorAll('form[data-api]').forEach(form => {
         try {
             const data = await apiRequest(apiForms[form.id], { method: 'POST', body: JSON.stringify(payload) });
             console.info('POST ' + apiForms[form.id] + ' succeeded');
-            const record = data.task || data.category || data.user;
             form.reset();
-            formMessage(form, data.message + (record ? ' Record ID: ' + record._id + '.' : ''), true);
+            formMessage(form, data.message, true);
             if (form.id === 'register' || form.id === 'login') {
                 const next = document.querySelector('#account-next');
                 if (data.user.role === 'admin' && next) {

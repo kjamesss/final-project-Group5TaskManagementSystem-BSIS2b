@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <script src="js/bootstrap.bundle.min.js" defer></script>
+    <script src="js/motion.js" defer></script>
     <script src="js/api.js" defer></script>
 </head>
 <body>
@@ -19,30 +20,35 @@
     </div></nav></header>
     <main id="main" class="container page " tabindex="-1">
 
-        <section class="landing-panel">
-            <div class="row align-items-center gy-5">
-                <div class="col-lg-7">
-                    <h1>Stay on top of your coursework.</h1>
-                    <p class="landing-copy">Organize tasks by subject, see whatâ€™s due, and keep track of your progress in one place.</p>
-                    <div class="action-row"><a class="btn btn-light" href="register.html">Create an account</a><a class="btn btn-outline-light" href="login.html">Log in</a></div>
-                </div>
-                <div class="col-lg-5">
-                    <div class="preview-sheet">
-                        <h2>Coursework at a glance</h2>
-                        <div class="sheet-row"><span>Submit dashboard wireframes<small>Web Systems and Technologies</small></span><span class="chip todo">To Do</span></div>
-                        <div class="sheet-row"><span>Review SQL joins<small>Database Management</small></span><span class="chip progress-tag">In Progress</span></div>
-                        <div class="sheet-row"><span>Outline case study<small>Systems Analysis and Design</small></span><span class="chip completed">Completed</span></div>
-                    </div>
-                </div>
+        <section class="landing-panel" aria-labelledby="home-heading">
+            <div class="hero-copy">
+                <p class="institution">Bicol University Polangui</p>
+                <h1 id="home-heading">Your academic<br><em>task planner.</em></h1>
+                <p class="landing-copy">Keep coursework, subjects, and deadlines together. See what needs your attention this week.</p>
+                <div class="action-row"><a class="btn btn-primary" href="register.html">Create an account <span aria-hidden="true">→</span></a><a class="btn btn-outline-primary" href="login.html">Log in</a></div>
             </div>
+            <figure class="agenda" aria-label="Sample weekly planner">
+                <div class="agenda-page">
+                    <div class="agenda-heading"><span>Weekly planner</span><span class="bookmark" aria-hidden="true"></span></div>
+                    <h2>Coursework</h2>
+                    <p class="agenda-caption">Sample week</p>
+                    <div class="agenda-row"><span class="agenda-day">Mon</span><span>Dashboard wireframes<small>Web Systems</small></span><span class="task-check" aria-hidden="true"></span></div>
+                    <div class="agenda-row"><span class="agenda-day">Wed</span><span>Review SQL joins<small>Database Management</small></span><span class="task-check" aria-hidden="true"></span></div>
+                    <div class="agenda-row"><span class="agenda-day">Fri</span><span>Outline case study<small>Systems Analysis</small></span><span class="task-check checked" aria-hidden="true">✓</span></div>
+                </div>
+            </figure>
         </section>
-        <section class="demo-strip" aria-labelledby="preview-heading">
-            <div><h2 id="preview-heading">Open your workspace</h2><p><a href="add-task.html">Add an academic task</a> after registering or logging in.</p></div>
-            <div class="action-row"><a class="btn btn-primary" href="dashboard.html">Student dashboard</a><a class="btn btn-outline-primary" href="admin.html">Administration</a></div>
+        <section class="workspace-links" aria-labelledby="workspace-heading">
+            <h2 id="workspace-heading">Open your workspace</h2>
+            <div class="workspace-grid">
+                <a href="dashboard.html"><strong>Student dashboard</strong><span>Review progress and upcoming deadlines.</span><b aria-hidden="true">↗</b></a>
+                <a href="tasks.html"><strong>Coursework</strong><span>Manage your tasks and subjects.</span><b aria-hidden="true">↗</b></a>
+                <a href="admin.html"><strong>Administration</strong><span>Review student accounts and activity.</span><b aria-hidden="true">↗</b></a>
+            </div>
         </section>
     </main>
     <footer class="site-footer"><div class="container footer-inner">
-        <span>Bicol University Polangui</span><span>IT 112 <span aria-hidden="true">Â·</span> Group 5 <span aria-hidden="true">Â·</span> Phase 6</span>
+        <span>Bicol University Polangui</span><span>IT 112 <span aria-hidden="true">·</span> Group 5 <span aria-hidden="true">·</span> BSIS-2B</span>
     </div></footer>
 
 </body>

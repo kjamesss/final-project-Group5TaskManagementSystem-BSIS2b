@@ -13,12 +13,14 @@ async function start() {
     await User.init();
     const origins = [
         'http://localhost:' + port, 'http://127.0.0.1:' + port,
+        ...(process.env.RENDER_EXTERNAL_URL ? [new URL(process.env.RENDER_EXTERNAL_URL).origin] : []),
         ...(process.env.FRONTEND_ORIGINS || '').split(',').map(value => value.trim()).filter(Boolean)
     ];
     const app = createApp({
         origins, secret: process.env.JWT_SECRET, production: process.env.NODE_ENV === 'production'
     });
-    const server = app.listen(port, '127.0.0.1', () => console.log('BU Task Planner is ready at http://localhost:' + port));
+    const host = process.env.NODE_ENV === 'production' ? '0.0.0.0' : '127.0.0.1';
+    const server = app.listen(port, host, () => console.log('BU Task Planner listening on port ' + port));
     async function stop() {
         server.close(async () => { await mongoose.disconnect(); process.exit(0); });
     }

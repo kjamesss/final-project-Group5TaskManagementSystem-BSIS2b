@@ -33,7 +33,7 @@ function showFeedback(message, error) {
             ? element('a', 'Log in', 'btn btn-sm btn-outline-primary ms-2')
             : element('button', 'Retry', 'btn btn-sm btn-outline-primary ms-2');
         if (action.tagName === 'A') action.href = 'login.html';
-        else action.addEventListener('click', refreshView);
+        else action.addEventListener('click', () => refreshView());
         feedback.append(action);
     }
 }
