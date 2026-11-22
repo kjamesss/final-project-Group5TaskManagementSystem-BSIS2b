@@ -6,7 +6,8 @@
     --brand: #165679;
     --brand-dark: #103d59;
     --bs-body-color: var(--ink);
-    --bs-body-font-family: "DM Sans", "Segoe UI", sans-serif;
+    --bs-body-font-family: "Source Sans 3", "Segoe UI", sans-serif;
+    --seal-blue: #9cdafe;
     --bs-link-color: #165679;
     --bs-link-hover-color: #103d59;
     --bs-link-color-rgb: 22, 86, 121;
@@ -21,8 +22,8 @@ a { text-underline-offset: .19em; }
 .skip-link:focus { transform: translateY(0); }
 .navbar { background: white; border-bottom: 1px solid var(--line); padding: .9rem 0; }
 .navbar-brand { display: inline-flex; align-items: center; gap: .65rem; font-weight: 750; color: var(--ink); margin-right: .5rem; }
-.navbar .nav-link { border-radius: .45rem; padding: .5rem .85rem; color: var(--muted); }
-.navbar .nav-link.active { background: #d6ebf8; color: #174e6e; font-weight: 700; }
+.navbar .nav-link { border-radius: .45rem; padding: .5rem .85rem; color: #173e55; font-weight: 600; }
+.navbar .nav-link.active { background: #fff; color: #103d59; font-weight: 700; box-shadow: inset 0 -2px #165679; }
 .navbar-nav { gap: .3rem; }
 .page { flex: 1; padding-top: clamp(2rem, 5vw, 4rem); padding-bottom: clamp(2.5rem, 5vw, 4rem); }
 .site-footer { border-top: 1px solid var(--line); font-size: .875rem; color: var(--muted); }
@@ -120,14 +121,32 @@ h2 { font-size: 1.34rem; }
     .editable-task { grid-template-columns: minmax(0, 2fr) minmax(6rem, .6fr) minmax(3.5rem, .4fr) minmax(6rem, .6fr) auto; }
 }
 
-@font-face { font-family: Castoro; src: url("../fonts/Castoro-Regular.ttf") format("truetype"); font-display: swap; }
-@font-face { font-family: Castoro; src: url("../fonts/Castoro-Italic.ttf") format("truetype"); font-style: italic; font-display: swap; }
-:root { --display: Castoro, Georgia, serif; }
+@font-face {
+    font-family: "Source Sans 3";
+    src: url("../fonts/source-sans-3-latin.woff2") format("woff2");
+    font-weight: 200 900;
+    font-display: swap;
+}
+:root { --display: var(--bs-body-font-family); }
 body { background-image: linear-gradient(115deg,#fbfdfe,var(--canvas) 55%,#f2f7fa); }
-h1, h2, .navbar-brand { font-family: var(--display); font-weight: 400; }
-.navbar { border-top: 4px solid var(--brand-dark); background: #fff; }
-.navbar-brand { font-size: 1.45rem; letter-spacing: -.04em; }
-.navbar .nav-link:hover { color: var(--brand-dark); background: #e7f3fa; }
+h1, h2, .navbar-brand { font-family: var(--display); font-weight: 650; }
+.navbar { border-top: 4px solid var(--brand-dark); background: var(--seal-blue); }
+.navbar-brand { font-size: 1.45rem; letter-spacing: -.018em; }
+.navbar :is(.nav-link, .navbar-brand, .navbar-toggler):focus-visible {
+    outline: 3px solid var(--brand-dark);
+    outline-offset: 2px;
+}
+@media (hover: hover) {
+    .navbar .nav-link:hover {
+        color: var(--brand-dark);
+        background: #eaf7ff;
+        text-decoration: underline;
+        text-decoration-thickness: 2px;
+        text-underline-offset: .28em;
+    }
+    .navbar-brand:hover { color: var(--brand-dark); text-decoration: underline; }
+    .navbar-toggler:hover { background: #eaf7ff; }
+}
 .page { padding-inline: clamp(1rem,3vw,2rem); }
 .page-heading { padding-bottom: 1.25rem; border-bottom: 1px solid var(--line); }
 .btn { border-radius: .35rem; }
@@ -166,7 +185,7 @@ h1, h2, .navbar-brand { font-family: var(--display); font-weight: 400; }
 .workspace-grid { display: grid; grid-template-columns: repeat(3,1fr); border-block: 1px solid #c2d5df; }
 .workspace-grid a { padding: 1.05rem 2.25rem 1.1rem .9rem; position: relative; text-decoration: none; display: flex; flex-direction: column; gap: .3rem; color: var(--ink); }
 .workspace-grid a + a { border-left: 1px solid var(--line); }
-.workspace-grid strong { font: 1.15rem var(--display); }
+.workspace-grid strong { font: 650 1.15rem var(--display); }
 .workspace-grid span { color: var(--muted); font-size: .86rem; }
 .workspace-grid b { position: absolute; right: 1rem; top: 1rem; color: var(--brand); }
 @media (hover:hover) {
@@ -216,7 +235,7 @@ h1, h2, .navbar-brand { font-family: var(--display); font-weight: 400; }
 .workspace .page-heading h1 { margin-top: .25rem; }
 @media(min-width:992px) {
     .workspace { padding-left: 15.5rem; }
-    .workspace header { position:fixed; z-index:1030; inset:0 auto 0 0; width:15.5rem; overflow:auto; background:#eef6fb; border-right:1px solid var(--line); }
+    .workspace header { position:fixed; z-index:1030; inset:0 auto 0 0; width:15.5rem; overflow:auto; background:linear-gradient(180deg,var(--seal-blue),#deeff9 24rem); border-right:1px solid var(--line); }
     .workspace .navbar { border:0; padding:1.55rem 1rem; background:transparent; }
     .workspace .navbar > .container,.workspace .navbar .navbar-nav { align-items:stretch; flex-direction:column; width:100%; }
     .workspace .navbar .navbar-collapse { display:block !important; width:100%; }
@@ -241,7 +260,7 @@ h1, h2, .navbar-brand { font-family: var(--display); font-weight: 400; }
 .landing-panel::before { content:""; position:absolute; z-index:-1; inset:0; background:linear-gradient(90deg,#0b2d44fa 0%,#0f354bed 34%,#193f5266 66%,#102e401a); }
 .hero-copy { max-width:43rem; padding:clamp(2rem,5vw,4rem); }
 .landing-panel h1 { font-size:clamp(3rem,5.4vw,5rem); }
-.landing-panel h1 em { color:#afe2ff; }
+.landing-panel h1 em { color:#afe2ff; font-style:normal; }
 .landing-panel .institution,.landing-panel .landing-copy { color:#f4faff; }
 .landing-panel .btn-primary { background:#ffc07e; border-color:#ffc07e; color:#302314; }
 .landing-panel .btn-primary:hover { background:#ffad56; }
@@ -267,7 +286,9 @@ h1, h2, .navbar-brand { font-family: var(--display); font-weight: 400; }
     scroll-margin-top: 1.5rem;
 }
 .team-section h2 { margin-bottom: .5rem; font-size: clamp(2rem, 4vw, 3rem); }
-.team-intro { max-width: 66ch; margin-bottom: 1.75rem; color: var(--muted); }
+.team-section h2, .team-intro { text-align: center; }
+.team-intro { max-width: 74ch; margin: 0 auto 1.75rem; color: var(--muted); line-height: 1.65; }
+.team-intro p + p { margin-top: .75rem; }
 .team-roster {
     display: grid;
     grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -289,9 +310,8 @@ h1, h2, .navbar-brand { font-family: var(--display); font-weight: 400; }
     margin: 0 auto 1rem;
     border: 3px solid white;
     border-radius: 50%;
-    box-shadow: 0 0 0 1px var(--line);
+    box-shadow: 0 0 0 2px #e98438;
 }
-.team-lead img { box-shadow: 0 0 0 2px #e98438; }
 .team-roster h3 { margin: 0; font: 600 1.03rem/1.35 var(--bs-body-font-family); color: var(--ink); }
 .team-roster p { margin: .3rem 0 0; font-size: .9rem; color: var(--muted); }
 @media (max-width: 767.98px) {
