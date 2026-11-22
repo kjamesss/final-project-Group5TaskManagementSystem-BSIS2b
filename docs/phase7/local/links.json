@@ -1,0 +1,30 @@
+{
+  "pages": [
+    "add-task.html",
+    "admin.html",
+    "dashboard.html",
+    "index.html",
+    "login.html",
+    "profile.html",
+    "register.html",
+    "tasks.html"
+  ],
+  "responses": {
+    "/add-task.html": 200,
+    "/admin.html": 200,
+    "/css/bootstrap.min.css": 200,
+    "/css/styles.css": 200,
+    "/dashboard.html": 200,
+    "/img/mark.png": 200,
+    "/index.html": 200,
+    "/js/api.js": 200,
+    "/js/bootstrap.bundle.min.js": 200,
+    "/js/display.js": 200,
+    "/js/motion.js": 200,
+    "/js/mutations.js": 200,
+    "/login.html": 200,
+    "/profile.html": 200,
+    "/register.html": 200,
+    "/tasks.html": 200
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "base": "http://localhost:3017",
+  "checkedAt": "2026-11-22T13:55:52.657Z",
+  "checks": [
+    "Register from the browser, validate a required field, and read the empty dashboard",
+    "Hide signed-out task actions and restore the dashboard after a failed read and retry",
+    "Create a subject and task, reject an impossible date, and verify dashboard links, filters and empty results",
+    "Edit and delete tasks and subjects, cancel deletion, and verify database readback by original ID",
+    "Use mobile navigation, edit profile, verify eight page widths, sign out, reject invalid login and sign back in",
+    "Verify administrator directory and oversight, account update, deletion protection, eligible deletion and no uncaught page errors"
+  ]
+}

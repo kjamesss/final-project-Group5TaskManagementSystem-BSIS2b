@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node backend/server.js",
     "dev": "node --watch backend/server.js",
-    "test": "node --test --test-concurrency=1 backend/test/integration.test.js"
+    "test": "node --test --test-concurrency=1 backend/test/integration.test.js",
+    "test:browser": "node qa/browser.cjs"
   },
   "engines": {
     "node": ">=22"
@@ -21,6 +22,7 @@
     "mongoose": "^9.0.0"
   },
   "devDependencies": {
-    "mongodb-memory-server": "^10.0.0"
+    "mongodb-memory-server": "^10.0.0",
+    "playwright-core": "^1.65.1"
   }
 }
