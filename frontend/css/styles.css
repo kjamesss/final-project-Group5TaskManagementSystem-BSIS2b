@@ -7,7 +7,7 @@
     --brand-dark: #103d59;
     --bs-body-color: var(--ink);
     --bs-body-font-family: "Source Sans 3", "Segoe UI", sans-serif;
-    --seal-blue: #9cdafe;
+    --nav-navy: #0f3249;
     --bs-link-color: #165679;
     --bs-link-hover-color: #103d59;
     --bs-link-color-rgb: 22, 86, 121;
@@ -22,7 +22,7 @@ a { text-underline-offset: .19em; }
 .skip-link:focus { transform: translateY(0); }
 .navbar { background: white; border-bottom: 1px solid var(--line); padding: .9rem 0; }
 .navbar-brand { display: inline-flex; align-items: center; gap: .65rem; font-weight: 750; color: var(--ink); margin-right: .5rem; }
-.navbar .nav-link { border-radius: .45rem; padding: .5rem .85rem; color: #173e55; font-weight: 600; }
+.navbar .nav-link { border-radius: .45rem; padding: .5rem .85rem; color: #f5faff; font-weight: 600; }
 .navbar .nav-link.active { background: #fff; color: #103d59; font-weight: 700; box-shadow: inset 0 -2px #165679; }
 .navbar-nav { gap: .3rem; }
 .page { flex: 1; padding-top: clamp(2rem, 5vw, 4rem); padding-bottom: clamp(2.5rem, 5vw, 4rem); }
@@ -130,10 +130,12 @@ h2 { font-size: 1.34rem; }
 :root { --display: var(--bs-body-font-family); }
 body { background-image: linear-gradient(115deg,#fbfdfe,var(--canvas) 55%,#f2f7fa); }
 h1, h2, .navbar-brand { font-family: var(--display); font-weight: 650; }
-.navbar { border-top: 4px solid var(--brand-dark); background: var(--seal-blue); }
-.navbar-brand { font-size: 1.45rem; letter-spacing: -.018em; }
+.navbar { border-top: 4px solid var(--brand-dark); background: var(--nav-navy); color: #f5faff; --bs-navbar-brand-hover-color: white; }
+.navbar-brand { font-size: 1.45rem; letter-spacing: -.018em; color: #fff; }
+.navbar-toggler { color: #fff; border-color: #91aaba; }
+.navbar-toggler-icon { filter: brightness(0) invert(1); }
 .navbar :is(.nav-link, .navbar-brand, .navbar-toggler):focus-visible {
-    outline: 3px solid var(--brand-dark);
+    outline: 3px solid #ffc07e;
     outline-offset: 2px;
 }
 @media (hover: hover) {
@@ -144,8 +146,8 @@ h1, h2, .navbar-brand { font-family: var(--display); font-weight: 650; }
         text-decoration-thickness: 2px;
         text-underline-offset: .28em;
     }
-    .navbar-brand:hover { color: var(--brand-dark); text-decoration: underline; }
-    .navbar-toggler:hover { background: #eaf7ff; }
+    .navbar-brand:hover { color: white; text-decoration: underline; }
+    .navbar-toggler:hover { background: #24516c; }
 }
 .page { padding-inline: clamp(1rem,3vw,2rem); }
 .page-heading { padding-bottom: 1.25rem; border-bottom: 1px solid var(--line); }
@@ -221,7 +223,7 @@ h1, h2, .navbar-brand { font-family: var(--display); font-weight: 650; }
 .member-initial { display:grid; place-items:center; flex-shrink:0; height: 2rem; width: 2rem; border-radius: 50%; background: #c6e7f9; color:#123f59; }
 .workspace .nav-link { display: flex; align-items: center; gap: .7rem; }
 .workspace .navbar .nav-plus { background:var(--brand); color:white; margin-bottom:.5rem; font-weight:700; }
-.workspace .navbar .nav-plus:hover { background:var(--brand-dark); }
+.workspace .navbar .nav-plus:hover { background:#286280; color:white; }
 .nav-symbol { display:inline-block; width: 1.1rem; height: 1.1rem; background: currentColor; mask: var(--nav-icon) center/contain no-repeat; }
 .symbol-dashboard { --nav-icon: url('../img/icons/grid.svg'); }
 .symbol-tasks { --nav-icon: url('../img/icons/check2-square.svg'); }
@@ -235,7 +237,7 @@ h1, h2, .navbar-brand { font-family: var(--display); font-weight: 650; }
 .workspace .page-heading h1 { margin-top: .25rem; }
 @media(min-width:992px) {
     .workspace { padding-left: 15.5rem; }
-    .workspace header { position:fixed; z-index:1030; inset:0 auto 0 0; width:15.5rem; overflow:auto; background:linear-gradient(180deg,var(--seal-blue),#deeff9 24rem); border-right:1px solid var(--line); }
+    .workspace header { position:fixed; z-index:1030; inset:0 auto 0 0; width:15.5rem; overflow:auto; background:var(--nav-navy); border-right:1px solid var(--line); }
     .workspace .navbar { border:0; padding:1.55rem 1rem; background:transparent; }
     .workspace .navbar > .container,.workspace .navbar .navbar-nav { align-items:stretch; flex-direction:column; width:100%; }
     .workspace .navbar .navbar-collapse { display:block !important; width:100%; }
