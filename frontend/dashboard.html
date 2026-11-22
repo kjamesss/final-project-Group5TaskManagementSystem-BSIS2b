@@ -27,6 +27,28 @@
             <div class="progress-track" aria-hidden="true"></div>
             <div class="row g-0 summary-grid" id="task-summary"></div>
         </section>
+        <section class="card calendar-panel mt-4" data-results hidden aria-labelledby="calendar-heading">
+            <h2 id="calendar-heading">Deadline calendar</h2>
+            <div class="calendar-toolbar">
+                <h3 id="calendar-month" aria-live="polite"></h3>
+                <div class="calendar-controls" role="group" aria-label="Choose calendar month">
+                    <button id="calendar-prev" class="btn btn-sm btn-outline-primary" type="button" aria-label="Previous month">‹</button>
+                    <button id="calendar-today" class="btn btn-sm btn-outline-primary" type="button">This month</button>
+                    <button id="calendar-next" class="btn btn-sm btn-outline-primary" type="button" aria-label="Next month">›</button>
+                </div>
+            </div>
+            <table class="deadline-calendar" aria-labelledby="calendar-heading calendar-month">
+                <thead><tr>
+                    <th scope="col" abbr="Monday">Mon</th><th scope="col" abbr="Tuesday">Tue</th>
+                    <th scope="col" abbr="Wednesday">Wed</th><th scope="col" abbr="Thursday">Thu</th>
+                    <th scope="col" abbr="Friday">Fri</th><th scope="col" abbr="Saturday">Sat</th>
+                    <th scope="col" abbr="Sunday">Sun</th>
+                </tr></thead>
+                <tbody id="calendar-days"></tbody>
+            </table>
+            <div id="calendar-agenda" class="calendar-agenda"></div>
+            <p id="calendar-empty" class="section-note mt-3 mb-0" hidden>No unfinished tasks are due this month.</p>
+        </section>
         <div class="row g-4 mt-1" data-results hidden>
             <div class="col-lg-7"><section class="card deadline-panel">
                 <h2>Upcoming deadlines</h2><p class="section-note">Due today or within the next seven days.</p>

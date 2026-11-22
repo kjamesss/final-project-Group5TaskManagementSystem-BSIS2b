@@ -96,6 +96,88 @@ function taskCard(task) {
     return card;
 }
 
+const monthFormat = new Intl.DateTimeFormat('en-PH', { month: 'long', year: 'numeric', timeZone: 'UTC' });
+let calendarMonth;
+let calendarTasks = [];
+
+function firstOfCurrentMonth() {
+    return new Date(dayFormat.format(new Date()).slice(0, 7) + '-01T00:00:00Z');
+}
+
+function calendarLink(task) {
+    const link = element('a', task.title, 'calendar-task');
+    link.href = 'tasks.html?' + new URLSearchParams({ q: task.title, task: task._id });
+    return link;
+}
+
+function drawCalendar() {
+    const days = document.querySelector('#calendar-days');
+    const agenda = document.querySelector('#calendar-agenda');
+    days.replaceChildren();
+    agenda.replaceChildren();
+    document.querySelector('#calendar-month').textContent = monthFormat.format(calendarMonth);
+    const today = dayFormat.format(new Date());
+    const prefix = calendarMonth.toISOString().slice(0, 7) + '-';
+    const grouped = new Map();
+    for (const task of calendarTasks) {
+        const date = taskDay(task);
+        if (!date.startsWith(prefix)) continue;
+        if (!grouped.has(date)) grouped.set(date, []);
+        grouped.get(date).push(task);
+    }
+    document.querySelector('#calendar-empty').hidden = grouped.size > 0;
+    const offset = (calendarMonth.getUTCDay() + 6) % 7;
+    const end = new Date(calendarMonth);
+    end.setUTCMonth(end.getUTCMonth() + 1, 0);
+    const length = end.getUTCDate();
+    const weeks = Math.ceil((offset + length) / 7);
+    for (let week = 0; week < weeks; week++) {
+        const row = days.insertRow();
+        for (let weekday = 0; weekday < 7; weekday++) {
+            const cell = row.insertCell();
+            const number = week * 7 + weekday - offset + 1;
+            if (number < 1 || number > length) continue;
+            const date = prefix + String(number).padStart(2, '0');
+            const time = element('time', number);
+            time.dateTime = date;
+            if (date === today) time.setAttribute('aria-current', 'date');
+            cell.append(time);
+            const items = grouped.get(date);
+            if (!items) continue;
+            const label = dateLabel(date);
+            const dayHeading = element('h4', label);
+            dayHeading.id = 'due-' + date;
+            dayHeading.tabIndex = -1;
+            const count = element('a', String(items.length), 'calendar-count');
+            count.href = '#' + dayHeading.id;
+            count.setAttribute('aria-label', label + ', ' + items.length + ' due');
+            cell.append(count);
+            const list = element('ul');
+            for (const task of items) {
+                cell.append(calendarLink(task));
+                const item = element('li');
+                item.append(calendarLink(task));
+                list.append(item);
+            }
+            agenda.append(dayHeading, list);
+        }
+    }
+}
+
+if (view === 'dashboard') {
+    calendarMonth = firstOfCurrentMonth();
+    for (const [id, shift] of [['calendar-prev', -1], ['calendar-next', 1]]) {
+        document.getElementById(id).addEventListener('click', () => {
+            calendarMonth.setUTCMonth(calendarMonth.getUTCMonth() + shift);
+            drawCalendar();
+        });
+    }
+    document.querySelector('#calendar-today').addEventListener('click', () => {
+        calendarMonth = firstOfCurrentMonth();
+        drawCalendar();
+    });
+}
+
 function renderDashboard(tasks) {
     document.querySelector('.dashboard-date').textContent = new Intl.DateTimeFormat('en-PH', {
         weekday: 'long', month: 'long', day: 'numeric', timeZone: 'Asia/Manila'
@@ -119,6 +201,8 @@ function renderDashboard(tasks) {
     today.setUTCDate(today.getUTCDate() + 7);
     const end = today.toISOString().slice(0, 10);
     const incomplete = tasks.filter(task => task.status !== 'Completed' && taskDay(task));
+    calendarTasks = incomplete;
+    drawCalendar();
 
     for (const [selector, items, empty] of [
         ['#upcoming-list', incomplete.filter(task => taskDay(task) >= start && taskDay(task) <= end), 'No upcoming deadlines.'],
@@ -138,6 +222,7 @@ function renderDashboard(tasks) {
 }
 
 const filters = document.querySelector('#task-filters');
+let selectedTaskId = new URLSearchParams(location.search).get('task');
 let taskRecords = [];
 let subjectRecords = [];
 let userRecords = [];
@@ -154,6 +239,7 @@ function applyTaskFilters(reset = true) {
     const status = values.get('status');
     const priority = values.get('priority');
     const matches = taskRecords.filter(task =>
+        (!selectedTaskId || task._id === selectedTaskId) &&
         (!query || [task.title, task.description, task.category?.name].join(' ').toLowerCase().includes(query)) &&
         (!category || (task.category?._id || 'uncategorized') === category) &&
         (!status || task.status === status) && (!priority || task.priority === priority)
@@ -164,9 +250,15 @@ function applyTaskFilters(reset = true) {
 
 if (filters) {
     filters.elements.q.value = new URLSearchParams(location.search).get('q') || '';
-    filters.addEventListener('input', () => applyTaskFilters());
+    filters.addEventListener('input', () => {
+        selectedTaskId = null;
+        applyTaskFilters();
+    });
     filters.addEventListener('submit', event => event.preventDefault());
-    filters.addEventListener('reset', () => setTimeout(() => applyTaskFilters(), 0));
+    filters.addEventListener('reset', () => {
+        selectedTaskId = null;
+        setTimeout(() => applyTaskFilters(), 0);
+    });
 }
 
 function tableRow(values) {

@@ -12,7 +12,7 @@ A coursework planner for Bicol University Polangui. Students organize assignment
 
 1. Choose **Create an account** and register with a name, email, and password. Registration opens the login page and confirms that the account is ready. A successful login opens the dashboard automatically.
 2. In **Tasks**, choose **New subject**, give it a name, and optionally select a display color. Choose **New task** to enter a title and deadline, then assign a subject, priority, status, and optional description.
-3. Open **Dashboard** for status totals and incomplete work due today through seven days ahead or already overdue. Select a deadline to find that assignment in the task list. Dates use Manila time.
+3. Open **Dashboard** to see progress, upcoming deadlines, and overdue work. The **Deadline calendar** shows unfinished tasks on their due dates. Use the arrows to browse months or **This month** to return. Select a task to open its record in the task list. On a phone, select a day’s count to jump to its assignments below the calendar. Dates use Manila time.
 4. Search by keyword or combine subject, status, and priority filters. Use **Edit** to update a record. **Delete** names the selected item and asks for confirmation. Removing a subject preserves its assignments as uncategorized.
 5. Use the workspace navigation to open **Add a task**, **Dashboard**, **Tasks**, or **Profile**. Use **Profile** to update a name or email. Administrators can search the account directory, edit student accounts, delete students with no coursework or subjects, and review recorded tasks.
 
