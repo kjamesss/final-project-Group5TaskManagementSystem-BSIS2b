@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Administration | BU Task Planner</title>
+    <link rel="icon" href="img/mark.png">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/bootstrap.bundle.min.js" defer></script>
+    <script src="js/api.js" defer></script>
+    <script src="js/mutations.js" defer></script>
+    <script src="js/display.js" defer></script>
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <header><nav class="navbar navbar-expand-md" aria-label="Main navigation"><div class="container">
+        <a class="navbar-brand" href="index.html"><img src="img/mark.png" width="36" height="36" alt=""> BU Task Planner</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="main-nav"><ul class="navbar-nav ms-auto"><li class="nav-item"><a class="nav-link active" aria-current=page href="admin.html">Administration</a></li><li class="nav-item"><a class="nav-link" href="login.html">Log in</a></li><li class="nav-item"><button class="nav-link d-none" id="logout" type="button">Log out</button></li></ul></div>
+    </div></nav></header>
+    <main id="main" class="container page" tabindex="-1" data-view="admin">
+<div class="page-heading"><div><h1>Administration</h1><p>Review saved accounts and coursework across students.</p></div></div>
+        <div id="view-feedback" role="status"></div>
+        <section class="card table-panel mb-4" data-results hidden>
+            <div class="table-heading"><h2>User accounts</h2><p class="section-note"></p></div>
+            <div class="px-3 pb-3"><label class="form-label" for="account-search">Search accounts</label><input id="account-search" class="form-control" type="search" placeholder="Name, email, or role"></div>
+            <div class="table-responsive" tabindex="0" role="region" aria-label="User accounts table">
+                <table class="table align-middle mb-0"><thead><tr><th scope="col">Name</th><th scope="col">Email</th><th scope="col">Role</th><th scope="col">Actions</th></tr></thead>
+                <tbody id="admin-accounts"></tbody></table>
+            </div><nav id="account-pages" aria-label="Account pagination" class="px-3"></nav>
+        </section>
+        <section class="card table-panel" data-results hidden>
+            <div class="table-heading"><h2>All tasks</h2><p class="section-note">Read-only oversight across student accounts.</p></div>
+            <div class="table-responsive" tabindex="0" role="region" aria-label="All tasks table">
+                <table class="table align-middle mb-0"><thead><tr><th scope="col">Task</th><th scope="col">Owner</th><th scope="col">Due date</th><th scope="col">Priority</th><th scope="col">Status</th></tr></thead>
+                <tbody id="admin-tasks"></tbody></table>
+            </div><nav id="admin-task-pages" aria-label="All tasks pagination" class="px-3"></nav>
+        </section>
+    </main>
+    <footer class="site-footer"><div class="container footer-inner">
+        <span>Bicol University Polangui</span><span>IT 112 <span aria-hidden="true">·</span> Group 5 <span aria-hidden="true">·</span> Phase 6</span>
+    </div></footer>
+
+    <div class="modal fade" id="mutation-modal" tabindex="-1" aria-labelledby="mutation-title" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header"><h2 class="modal-title fs-5" id="mutation-title"></h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+                <div class="modal-body">
+                    <form class="form-stack">
+                        <div id="mutation-fields" class="form-stack"></div>
+                        <div role="status" class="d-none"></div>
+                        <div class="d-flex gap-2 justify-content-end">
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
