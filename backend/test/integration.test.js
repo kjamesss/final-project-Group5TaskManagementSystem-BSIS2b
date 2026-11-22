@@ -38,8 +38,11 @@ test('Registration saves a normalized account with a hash and server-selected us
         name: ' Phase Four Student ', email: 'PHASE4@EXAMPLE.TEST', password: 'LabPassword123!', role: 'admin'
     });
     assert.equal(response.status, 201);
-    cookie = response.headers.get('set-cookie').split(';')[0];
-    assert.match(response.headers.get('set-cookie'), /HttpOnly/);
+    const clearedCookie = response.headers.get('set-cookie').split(';')[0];
+    assert.equal((await fetch(base + '/api/session', { headers: { Cookie: clearedCookie } })).status, 401);
+    const login = await request('/api/login', { email: 'phase4@example.test', password: 'LabPassword123!' });
+    cookie = login.headers.get('set-cookie').split(';')[0];
+    assert.match(login.headers.get('set-cookie'), /HttpOnly/);
     const data = await response.json();
     assert.equal(data.user.role, 'user');
     assert.equal(data.user.email, 'phase4@example.test');
@@ -144,9 +147,10 @@ test('GET routes enforce ownership and administrator access', async () => {
     assert.equal(tasks.length, 2);
     assert.equal(tasks.find(task => task.title === 'Submit Phase 4 report').category.name, 'IT 112');
 
-    const login = await request('/api/users', {
+    await request('/api/users', {
         name: 'Empty account', email: 'empty@example.test', password: 'LabPassword123!'
     });
+    const login = await request('/api/login', { email: 'empty@example.test', password: 'LabPassword123!' });
     const emptyCookie = login.headers.get('set-cookie').split(';')[0];
     assert.deepEqual(await (await get('/api/tasks', emptyCookie)).json(), { tasks: [] });
 

@@ -69,21 +69,20 @@ document.querySelectorAll('form[data-api]').forEach(form => {
         const original = button.textContent;
         form.dataset.submitting = 'true';
         button.disabled = true;
-        button.textContent = 'Saving…';
+        button.textContent = form.id === 'login' ? 'Logging in…' : form.id === 'register' ? 'Creating account…' : 'Saving…';
         form.setAttribute('aria-busy', 'true');
         try {
             const data = await apiRequest(apiForms[form.id], { method: 'POST', body: JSON.stringify(payload) });
-            console.info('POST ' + apiForms[form.id] + ' succeeded');
+            if (form.id === 'register') {
+                location.replace('login.html?registered=1');
+                return;
+            }
+            if (form.id === 'login') {
+                location.replace('dashboard.html');
+                return;
+            }
             form.reset();
             formMessage(form, data.message, true);
-            if (form.id === 'register' || form.id === 'login') {
-                const next = document.querySelector('#account-next');
-                if (data.user.role === 'admin' && next) {
-                    next.querySelector('a').href = 'admin.html';
-                    next.querySelector('a').textContent = 'Open administration';
-                }
-                next?.classList.remove('d-none');
-            }
             if (form.id === 'create-category') {
                 await loadSubjects().catch(() => {
                     formMessage(form, data.message + ' Reload the page to refresh your subject choices.', true);
@@ -109,4 +108,12 @@ if (document.querySelector('form[data-api] [name="category"]')) {
         if (notice) notice.textContent = error instanceof TypeError ?
             'Start the backend to connect this form to your account.' : error.message;
     });
+}
+
+const registrationNotice = document.querySelector('#registration-notice');
+if (registrationNotice && new URLSearchParams(location.search).get('registered') === '1') {
+    registrationNotice.textContent = 'Account created. Log in with your email and password.';
+    registrationNotice.hidden = false;
+    history.replaceState(null, '', 'login.html');
+    document.querySelector('#login-email').focus();
 }

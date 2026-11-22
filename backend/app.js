@@ -113,8 +113,8 @@ function createApp(config) {
         const user = await User.create({
             name, email, passwordHash: await bcrypt.hash(password, 12), role: 'user'
         });
-        signIn(res, user);
-        res.status(201).json({ message: 'Account created successfully. You can now add a task.', user: accountData(user) });
+        res.clearCookie('bu_session', { httpOnly: true, sameSite: 'lax', secure: config.production, path: '/' });
+        res.status(201).json({ message: 'Account created. Log in to continue.', user: accountData(user) });
     });
 
     app.post('/api/login', async (req, res) => {

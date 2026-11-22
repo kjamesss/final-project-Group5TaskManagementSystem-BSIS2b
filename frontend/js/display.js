@@ -97,9 +97,20 @@ function taskCard(task) {
 }
 
 function renderDashboard(tasks) {
-    const summary = statuses.map(status => {
+    document.querySelector('.dashboard-date').textContent = new Intl.DateTimeFormat('en-PH', {
+        weekday: 'long', month: 'long', day: 'numeric', timeZone: 'Asia/Manila'
+    }).format(new Date());
+    const track = document.querySelector('.progress-track');
+    track.replaceChildren();
+    const summary = statuses.map((status, index) => {
+        const count = tasks.filter(task => task.status === status).length;
+        if (count) {
+            const segment = element('span', undefined, 'segment-' + index);
+            segment.style.flexGrow = count;
+            track.append(segment);
+        }
         const cell = element('div', undefined, 'col-4 summary-cell');
-        cell.append(element('strong', tasks.filter(task => task.status === status).length), element('span', status));
+        cell.append(element('strong', count), element('span', status));
         return cell;
     });
     document.querySelector('#task-summary').replaceChildren(...summary);
@@ -202,6 +213,10 @@ async function refreshView(savedMessage = '') {
     try {
         const { user } = await apiRequest('/api/session');
         if (version !== refreshVersion) return;
+        document.querySelector('.member-name').textContent = user.name;
+        document.querySelector('.member-initial').textContent = Array.from(user.name.trim())[0]?.toUpperCase() || '•';
+        document.querySelector('.member').hidden = false;
+        document.querySelector('[data-admin-link]').hidden = user.role !== 'admin';
         const logout = document.querySelector('#logout');
         logout?.classList.remove('d-none');
         document.querySelector('.navbar a[href="login.html"]')?.classList.add('d-none');

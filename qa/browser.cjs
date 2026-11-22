@@ -24,7 +24,7 @@ function passed(check) { checks.push(check); console.log('PASS', check); }
 async function run() {
     await mongoose.connect(process.env.MONGODB_URI);
     browser = await chromium.launch({ executablePath: process.env.CHROME_PATH });
-    const context = await browser.newContext({ viewport: { width: 1440, height: 960 }, timezoneId: 'Asia/Manila' });
+    const context = await browser.newContext({ viewport: { width: 1440, height: 960 }, timezoneId: 'Asia/Manila', reducedMotion: 'reduce' });
     const page = await context.newPage();
     page.setDefaultTimeout(20000);
     const errors = [];
@@ -63,11 +63,18 @@ async function run() {
     await page.locator('#register-email').fill(email);
     await page.locator('#register-password').fill(password);
     await button('Create account').click();
-    await page.getByRole('link',{name:'Open dashboard'}).click();
+    await page.waitForURL('**/login.html*');
+    await page.getByText('Account created. Log in with your email and password.').waitFor();
+    await request('GET','/api/session',401);
+    await shot('login');
+    await page.locator('#login-email').fill(email);
+    await page.locator('#login-password').fill(password);
+    await page.locator('#login button[type=submit]').click();
+    await page.waitForURL('**/dashboard.html');
     await page.getByText('No upcoming deadlines.').waitFor();
     student = await User.findOne({ email });
     assert.ok(student);
-    passed('Register from the browser, validate a required field, and read the empty dashboard');
+    passed('Register, check the login redirect and signed-out session, then log in directly to the dashboard');
     await page.route('**/api/tasks', route => route.abort(), {times:1});
     await page.reload();
     await button('Retry').click();
@@ -106,6 +113,7 @@ async function run() {
     await page.locator('#task-filters-q').fill('no such assignment');
     await page.getByText('No matching tasks.').waitFor();
     await button('Clear filters').click();
+    await page.waitForFunction(() => document.querySelectorAll('.task-row').length === 3);
     await shot('tasks');
     passed('Create a subject and task, reject an impossible date, and verify dashboard links, filters and empty results');
 
@@ -154,12 +162,17 @@ async function run() {
     await page.getByText('Email or password is incorrect.').waitFor();
     await page.locator('#login-password').fill(password);
     await page.locator('#login button[type=submit]').click();
-    await page.getByRole('link',{name:'Open dashboard'}).waitFor();
+    await page.waitForURL('**/dashboard.html');
     passed('Use mobile navigation, edit profile, verify eight page widths, sign out, reject invalid login and sign back in');
 
     admin = await User.create({name:'QA reviewer',email:adminEmail,passwordHash:await bcrypt.hash(password,12),role:'admin'});
-    await request('POST','/api/login',200,{email:adminEmail,password});
-    await go('/admin.html');
+    await go('/login.html');
+    await page.locator('#login-email').fill(adminEmail);
+    await page.locator('#login-password').fill(password);
+    await page.locator('#login button[type=submit]').click();
+    await page.waitForURL('**/dashboard.html');
+    await button('Toggle navigation').click();
+    await page.getByRole('link',{name:'Administration'}).click();
     await page.locator('#account-search').fill(email);
     await page.getByRole('cell',{name:email,exact:true}).waitFor();
     await request('PUT','/api/users/'+student.id,200,{name:'Reviewed student',email});

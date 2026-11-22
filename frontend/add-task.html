@@ -12,12 +12,12 @@
     <script src="js/api.js" defer></script>
     <script src="js/display.js" defer></script>
 </head>
-<body>
+<body class="workspace">
     <a href="#main" class="skip-link">Skip to content</a>
-    <header><nav class="navbar navbar-expand-md" aria-label="Main navigation"><div class="container">
+    <header><nav class="navbar navbar-expand-lg" aria-label="Main navigation"><div class="container">
         <a class="navbar-brand" href="index.html"><img src="img/mark.png" width="36" height="36" alt=""> BU Task Planner</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-        <div class="collapse navbar-collapse" id="main-nav"><ul class="navbar-nav ms-auto"><li class="nav-item"><a class="nav-link"  href="dashboard.html">Dashboard</a></li><li class="nav-item"><a class="nav-link active" aria-current=page href="tasks.html">Tasks</a></li><li class="nav-item"><a class="nav-link"  href="profile.html">Profile</a></li><li class="nav-item"><a class="nav-link" href="login.html">Log in</a></li><li class="nav-item"><button class="nav-link d-none" id="logout" type="button">Log out</button></li></ul></div>
+        <div class="collapse navbar-collapse" id="main-nav"><div class="member" hidden><span class="member-initial" aria-hidden="true"></span><span class="member-name"></span></div><ul class="navbar-nav ms-auto"><li class="nav-item"><a class="nav-link nav-plus active" aria-current="page" href="add-task.html"><span class="nav-symbol symbol-plus" aria-hidden="true"></span>Add a task</a></li><li class="nav-item"><a class="nav-link nav-dashboard" href="dashboard.html"><span class="nav-symbol symbol-dashboard" aria-hidden="true"></span>Dashboard</a></li><li class="nav-item"><a class="nav-link nav-tasks" href="tasks.html"><span class="nav-symbol symbol-tasks" aria-hidden="true"></span>Tasks</a></li><li class="nav-item"><a class="nav-link nav-profile" href="profile.html"><span class="nav-symbol symbol-profile" aria-hidden="true"></span>Profile</a></li><li class="nav-item" data-admin-link hidden><a class="nav-link nav-admin" href="admin.html"><span class="nav-symbol symbol-admin" aria-hidden="true"></span>Administration</a></li><li class="nav-item"><a class="nav-link" href="login.html">Log in</a></li><li class="nav-item"><button class="nav-link d-none" id="logout" type="button">Log out</button></li></ul></div>
     </div></nav></header>
     <main id="main" class="container page" tabindex="-1" data-view="add-task"><div class="page-heading"><div><h1>Add an academic task</h1><p>Save coursework and its subject to your student account.</p></div><a class="btn btn-outline-primary" href="tasks.html">Back to tasks</a></div>
 <div id="view-feedback" role="status"></div>
