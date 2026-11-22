@@ -1,8 +1,8 @@
 {
   "base": "https://bu-task-planner-group5.onrender.com",
-  "checkedAt": "2026-11-22T13:56:17.310Z",
+  "checkedAt": "2026-11-22T15:27:25.065Z",
   "checks": [
-    "Register from the browser, validate a required field, and read the empty dashboard",
+    "Register, check the login redirect and signed-out session, then log in directly to the dashboard",
     "Hide signed-out task actions and restore the dashboard after a failed read and retry",
     "Create a subject and task, reject an impossible date, and verify dashboard links, filters and empty results",
     "Edit and delete tasks and subjects, cancel deletion, and verify database readback by original ID",

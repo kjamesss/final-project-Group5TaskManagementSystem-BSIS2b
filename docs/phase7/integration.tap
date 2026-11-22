@@ -2,91 +2,91 @@ TAP version 13
 # Subtest: Registration saves a normalized account with a hash and server-selected user role
 ok 1 - Registration saves a normalized account with a hash and server-selected user role
   ---
-  duration_ms: 744.8491
+  duration_ms: 833.8633
   type: 'test'
   ...
 # Subtest: Duplicate emails return 409 without adding an account
 ok 2 - Duplicate emails return 409 without adding an account
   ---
-  duration_ms: 271.1633
+  duration_ms: 235.5878
   type: 'test'
   ...
 # Subtest: Invalid and missing registration inputs return 400
 ok 3 - Invalid and missing registration inputs return 400
   ---
-  duration_ms: 13.4346
+  duration_ms: 5.6104
   type: 'test'
   ...
 # Subtest: Login rejects incorrect passwords and accepts normalized email
 ok 4 - Login rejects incorrect passwords and accepts normalized email
   ---
-  duration_ms: 542.8872
+  duration_ms: 474.1946
   type: 'test'
   ...
 # Subtest: Unauthenticated task and subject submissions return 401
 ok 5 - Unauthenticated task and subject submissions return 401
   ---
-  duration_ms: 4.1745
+  duration_ms: 2.9523
   type: 'test'
   ...
 # Subtest: Subject and task insertion preserve ERD values and ignore a spoofed owner
 ok 6 - Subject and task insertion preserve ERD values and ignore a spoofed owner
   ---
-  duration_ms: 17.9767
+  duration_ms: 15.4345
   type: 'test'
   ...
 # Subtest: Tasks can be inserted without a category
 ok 7 - Tasks can be inserted without a category
   ---
-  duration_ms: 6.1189
+  duration_ms: 6.3543
   type: 'test'
   ...
 # Subtest: Invalid task date, status, priority and category are rejected
 ok 8 - Invalid task date, status, priority and category are rejected
   ---
-  duration_ms: 21.2656
+  duration_ms: 22.5203
   type: 'test'
   ...
 # Subtest: A student cannot use another student category
 ok 9 - A student cannot use another student category
   ---
-  duration_ms: 11.5095
+  duration_ms: 6.9424
   type: 'test'
   ...
 # Subtest: Allowed Live Server origin receives CORS headers and other origins are rejected
 ok 10 - Allowed Live Server origin receives CORS headers and other origins are rejected
   ---
-  duration_ms: 2.746
+  duration_ms: 2.1191
   type: 'test'
   ...
 # Subtest: Malformed JSON and unknown API routes return JSON errors
 ok 11 - Malformed JSON and unknown API routes return JSON errors
   ---
-  duration_ms: 4.0831
+  duration_ms: 3.3862
   type: 'test'
   ...
 # Subtest: GET routes enforce ownership and administrator access
 ok 12 - GET routes enforce ownership and administrator access
   ---
-  duration_ms: 294.6072
+  duration_ms: 506.444
   type: 'test'
   ...
 # Subtest: Task PUT and DELETE validate data, enforce ownership, and change the stored document
 ok 13 - Task PUT and DELETE validate data, enforce ownership, and change the stored document
   ---
-  duration_ms: 32.1224
+  duration_ms: 33.5424
   type: 'test'
   ...
 # Subtest: Subject editing and deletion preserve coursework and protect other owners
 ok 14 - Subject editing and deletion preserve coursework and protect other owners
   ---
-  duration_ms: 18.2966
+  duration_ms: 19.6286
   type: 'test'
   ...
 # Subtest: Account changes preserve roles and refuse deletion of an administrator or an account with coursework
 ok 15 - Account changes preserve roles and refuse deletion of an administrator or an account with coursework
   ---
-  duration_ms: 34.982
+  duration_ms: 38.0994
   type: 'test'
   ...
 1..15
@@ -97,4 +97,4 @@ ok 15 - Account changes preserve roles and refuse deletion of an administrator o
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 3780.3992
+# duration_ms 3673.9768
