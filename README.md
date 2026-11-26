@@ -70,6 +70,22 @@ Run `npm run test:browser` against a running copy. Set `CHROME_PATH` to your Chr
 
 The [Render Blueprint](render.yaml) deploys a free Node web service in Singapore from `main`, installs production dependencies with `npm ci --omit=dev`, and runs `npm start`. The Blueprint prompts for `MONGODB_URI` during setup. Allow the service to reach Atlas in the cluster’s network settings. Render supplies the public origin and checks [API readiness](https://bu-task-planner-group5.onrender.com/api/health). An idle free service can take a little time to wake.
 
+## Phase submissions
+
+- [Phase 1 · Project Design and Alignment](docs/planning/Phase_1_BU_Student_Academic_Task_and_Deadline_Management_System.pdf)
+
+- [Phase 2 · Backend Development and API Integration](docs/phase2/Phase-2-Report.pdf)
+
+- [Phase 3 · Frontend Development](docs/phase3/Phase-3-Report.pdf)
+
+- [Phase 4 · Form Submission and Data Insertion](docs/phase4/Phase-4-Report.pdf)
+
+- [Phase 5 · Displaying and Managing Data](docs/phase5/Phase-5-Report.pdf)
+
+- [Phase 6 · Update and Delete Functionalities](docs/phase6/Phase-6-Report.pdf)
+
+- [Phase 7 · Testing, Documentation and Final Deployment](docs/phase7/Phase-7-Final-Report.pdf)
+
 ## Contributors
 
 | Member | Project role |
